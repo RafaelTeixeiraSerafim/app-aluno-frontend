@@ -1,13 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 :root {
-  --green: #0f5830;
+  --green: #146c3a;
+  --green-deep: #0c4527;
   --green-light: #e7f3ec;
-  --gray: #999999;
-  --gray-border: #cccccc;
-  --background: #ededed;
+  --accent: #f2b705;
+  --ink: #1f2937;
+  --gray: #8a8f98;
+  --gray-border: #e2e5ea;
+  --background: #f4f6f5;
   --white: #ffffff;
   --error: #c0392b;
+  --shadow: 0 10px 30px rgba(15, 88, 48, 0.08);
+  --shadow-hover: 0 16px 40px rgba(15, 88, 48, 0.14);
+  --radius: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 * {
@@ -33,25 +43,40 @@ body {
 }
 
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   color: var(--white);
-  background-color: var(--green);
+  background: linear-gradient(155deg, var(--green) 0%, var(--green-deep) 100%);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '\201C';
+  position: absolute;
+  top: 40px;
+  left: 8%;
+  font-size: 180px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.12);
 }
 
 .hero p {
   display: block;
   width: 80%;
-  font-size: 40px;
+  font-size: 38px;
+  line-height: 1.35;
 }
 
 .hero p span {
   display: block;
   margin-top: 30px;
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  color: var(--accent);
 }
 
 .form-area {
@@ -67,7 +92,8 @@ body {
 }
 
 .form-area h1 {
-  color: #1f2937;
+  color: var(--ink);
+  letter-spacing: -0.5px;
 }
 
 .field {
@@ -86,16 +112,18 @@ body {
 .form-area input {
   display: block;
   width: 100%;
-  padding: 8px 12px;
+  padding: 11px 14px;
   border: 1px solid var(--gray-border);
-  border-radius: 4px;
+  border-radius: 10px;
   font-family: inherit;
   font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-area input:focus {
   outline: none;
   border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(20, 108, 58, 0.12);
 }
 
 .field__error {
@@ -128,25 +156,35 @@ body {
 .button {
   display: block;
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   color: var(--white);
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   font-family: inherit;
   font-size: 14px;
   font-weight: bold;
   border: none;
-  border-radius: 4px;
-  background-color: var(--green);
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+  box-shadow: 0 6px 16px rgba(20, 108, 58, 0.22);
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .button:hover {
-  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.button:active {
+  transform: translateY(0);
 }
 
 .button:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
+  box-shadow: none;
   cursor: not-allowed;
+  transform: none;
 }
 
 .form-area .button {
@@ -168,7 +206,11 @@ body {
 }
 
 .menu {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background-color: var(--white);
+  box-shadow: 0 1px 0 var(--gray-border), 0 6px 18px rgba(15, 88, 48, 0.05);
 }
 
 .menu__body {
@@ -198,19 +240,32 @@ body {
 }
 
 .menu__item {
+  position: relative;
   display: inline-block;
-  padding: 0 12px;
+  padding: 6px 14px;
   color: var(--gray);
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.2s ease;
 }
 
 .menu__item:hover {
-  text-decoration: underline;
+  color: var(--ink);
 }
 
 .menu__item--active {
   color: var(--green);
+}
+
+.menu__item--active::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -4px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: var(--accent);
 }
 
 /* ===================== Dashboard ===================== */
@@ -219,9 +274,23 @@ body {
 }
 
 .welcome h2 {
-  margin: 0 0 8px;
+  position: relative;
+  margin: 0 0 14px;
+  padding-left: 16px;
   font-size: 32px;
+  letter-spacing: -0.5px;
   color: var(--green);
+}
+
+.welcome h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 5px;
+  border-radius: 3px;
+  background-color: var(--accent);
 }
 
 .welcome p {
@@ -235,7 +304,14 @@ body {
   margin: 30px 0;
   background-color: var(--white);
   border: 1px solid var(--gray-border);
-  border-radius: 8px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .card__body {
@@ -250,13 +326,14 @@ body {
 
 .card__badge {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 6px 12px;
   background-color: var(--green-light);
   color: var(--green);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 .card__title {
@@ -375,13 +452,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  background-color: var(--green);
-  color: var(--green-light);
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+  color: var(--white);
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
+  box-shadow: var(--shadow);
 }
 
 .profile__header h2 {
@@ -417,7 +495,9 @@ body {
   margin-top: 24px;
   background-color: var(--white);
   border: 1px solid var(--gray-border);
-  border-radius: 8px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
 .profile__row {
@@ -491,10 +571,21 @@ body {
   display: flex;
   gap: 12px;
   margin-top: 16px;
-  padding: 12px;
+  padding: 10px 10px 10px 18px;
   background-color: var(--white);
   border: 1px solid var(--gray-border);
-  border-radius: 12px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tutor__form:focus-within {
+  border-color: var(--green);
+  box-shadow: var(--shadow-hover);
+}
+
+.tutor__form .button {
+  border-radius: 999px;
 }
 
 .tutor__form input {
