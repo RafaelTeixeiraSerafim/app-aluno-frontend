@@ -65,8 +65,11 @@ function DashboardPage() {
             <span className="card__badge">Em progresso</span>
             <h3 className="card__title">{item.title}</h3>
             <p className="card__description">{item.description}</p>
-            <div className="card__progress">
-              <div style={{ width: `${item.progress}%` }}>{item.progress}%</div>
+            <div className="progress-row">
+              <div className="card__progress">
+                <div style={{ width: `${item.progress}%` }}></div>
+              </div>
+              <span className="progress-value">{item.progress}%</span>
             </div>
           </div>
           <Button>Retomar Estudo →</Button>

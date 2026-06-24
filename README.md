@@ -36,7 +36,7 @@ visualizá-la).
 app-aluno-react/
 ├── public/
 ├── src/
-│   ├── components/   # Componentes reutilizáveis (InputField, Button, Card, Header, layouts)
+│   ├── components/   # Componentes reutilizáveis (InputField, Button, Card, Header, Icons, layouts)
 │   ├── pages/        # Telas/rotas (LoginPage, DashboardPage, ...)
 │   ├── context/      # UserContext.jsx (Context API)
 │   ├── services/     # Chamadas de API (tutorService.js)
@@ -47,6 +47,20 @@ app-aluno-react/
 ├── package.json
 └── README.md
 ```
+
+## Funcionalidades
+
+- **Fluxo de autenticação completo:** Login, Cadastro (passos 1 e 2), Recuperar
+  senha e Nova senha, com formulários controlados e validação.
+- **Navegação SPA** entre as telas internas (Dashboard, Disciplinas, Perfil e
+  Tutor IA) sem recarregar a página, com menu indicando a rota ativa.
+- **Dashboard** com saudação dinâmica (conforme a hora) e dados do usuário
+  logado.
+- **Disciplinas** renderizadas a partir de uma coleção de dados.
+- **Perfil** exibindo os dados do usuário compartilhados via Context API.
+- **Tutor IA** consumindo uma API externa com tratamento de carregando / erro /
+  dados.
+- **Layout responsivo** (desktop e mobile).
 
 ## Rotas
 

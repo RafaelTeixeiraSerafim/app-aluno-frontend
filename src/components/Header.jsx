@@ -1,12 +1,19 @@
 import { NavLink } from 'react-router-dom'
+import {
+  DashboardIcon,
+  BookIcon,
+  RobotIcon,
+  UserIcon,
+  GraduationIcon,
+} from './Icons.jsx'
 
 // Navigation menu for the internal screens.
 // Uses NavLink to visually highlight the active route ("menu__item--active").
 const links = [
-  { to: '/dashboard', label: 'Painel' },
-  { to: '/subjects', label: 'Disciplinas' },
-  { to: '/tutor', label: 'Tutor IA' },
-  { to: '/profile', label: 'Perfil' },
+  { to: '/dashboard', label: 'Painel', Icon: DashboardIcon },
+  { to: '/subjects', label: 'Disciplinas', Icon: BookIcon },
+  { to: '/tutor', label: 'Tutor IA', Icon: RobotIcon },
+  { to: '/profile', label: 'Perfil', Icon: UserIcon },
 ]
 
 function Header() {
@@ -14,19 +21,25 @@ function Header() {
     <header className="menu">
       <div className="menu__body">
         <h1 className="menu__title">
-          Academia <span>Portal do Aluno</span>
+          <span className="menu__logo" aria-hidden="true">
+            <GraduationIcon width={20} height={20} />
+          </span>
+          <span>
+            Academia <span className="menu__subtitle">Portal do Aluno</span>
+          </span>
         </h1>
 
         <nav className="menu__links">
-          {links.map((link) => (
+          {links.map(({ to, label, Icon }) => (
             <NavLink
-              key={link.to}
-              to={link.to}
+              key={to}
+              to={to}
               className={({ isActive }) =>
                 isActive ? 'menu__item menu__item--active' : 'menu__item'
               }
             >
-              {link.label}
+              <Icon className="menu__icon" />
+              {label}
             </NavLink>
           ))}
         </nav>

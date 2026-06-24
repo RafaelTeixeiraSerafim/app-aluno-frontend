@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Button from '../components/Button.jsx'
+import { SparkleIcon } from '../components/Icons.jsx'
 import { askTutor } from '../services/tutorService.js'
 import { useUser } from '../context/UserContext.jsx'
 
@@ -46,18 +47,31 @@ function TutorAIPage() {
           </p>
         )}
 
-        {conversation.map((message, index) => (
-          <div className="tutor__message" key={index}>
-            <strong>{message.author === 'user' ? firstName : 'Tutor IA'}</strong>
-            <p>{message.text}</p>
-          </div>
-        ))}
+        {conversation.map((message, index) => {
+          const isUser = message.author === 'user'
+          return (
+            <div className="tutor__message" key={index}>
+              <div className={isUser ? 'tutor__avatar tutor__avatar--user' : 'tutor__avatar'}>
+                {isUser ? firstName[0] : <SparkleIcon width={16} height={16} />}
+              </div>
+              <div className="tutor__bubble">
+                <strong>{isUser ? firstName : 'Tutor IA'}</strong>
+                <p>{message.text}</p>
+              </div>
+            </div>
+          )
+        })}
 
         {/* State: loading */}
         {loading && (
           <div className="tutor__message">
-            <strong>Tutor IA</strong>
-            <p className="tutor__loading">Pensando...</p>
+            <div className="tutor__avatar">
+              <SparkleIcon width={16} height={16} />
+            </div>
+            <div className="tutor__bubble">
+              <strong>Tutor IA</strong>
+              <p className="tutor__loading">Pensando...</p>
+            </div>
           </div>
         )}
 
